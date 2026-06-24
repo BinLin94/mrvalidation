@@ -2,7 +2,7 @@
 #' @description calculates the validation data for production of grass from managed pastures and rangelands separetely
 #' @param datasource Currently available: \code{"MAgPIEown"}
 #' @return List of magpie objects with results on country level, weight on country level, unit and description.
-#' @author Marcos Alves
+#' @author Marcos Alves, Bin Lin
 #' @seealso
 #' \code{\link[mrcommons]{calcFAOmassbalance}},
 #' @examples
@@ -35,7 +35,8 @@ calcValidGrassLSUha <- function(datasource = "MAgPIEown") {
     grasslShares[, , "range"] <- 1 - grasslShares[, , "pastr"]
     grasslShares[is.nan(grasslShares) | is.infinite(grasslShares)] <- 0
 
-    livestock  <- setNames(readSource("GLW3"), "liv_numb")
+    # livestock  <- setNames(readSource("GLW3"), "liv_numb")  # implicit default subtype "Da"
+    livestock  <- setNames(readSource("GLW3", subtype = "Da_Ct_2010"), "liv_numb")
     livstSplit <- livestock * grasslShares
     livstSplit <- collapseNames(livstSplit)
     livstSplitCtry <- toolAggregate(livstSplit, rel = mappingCtry,
