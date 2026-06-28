@@ -38,6 +38,7 @@ calcValidGrassLSUha <- function(datasource = "MAgPIEown") {
     # livestock  <- setNames(readSource("GLW3"), "liv_numb")  # implicit default subtype "Da"
     livestock  <- setNames(readSource("GLW3", subtype = "Da_Ct_2010"), "liv_numb")
     livstSplit <- livestock * grasslShares
+    getYears(livstSplit) <- years  # livestock (y2010) × grasslShares (12 yr) creates combined names like "y1965.y2010"; reset to standard years
     livstSplit <- collapseNames(livstSplit)
     livstSplitCtry <- toolAggregate(livstSplit, rel = mappingCtry,
                                     from = "coordiso", to = "iso")
