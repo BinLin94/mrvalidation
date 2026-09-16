@@ -24,5 +24,5 @@ calcOutput("ValidGrassLSUha")
 \code{\link[mrcommons]{calcFAOmassbalance}},
 }
 \author{
-Marcos Alves
+Marcos Alves, Bin Lin
 }
